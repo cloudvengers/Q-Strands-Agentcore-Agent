@@ -1,0 +1,30 @@
+default_agent: aws_security_status_agent
+agents:
+  aws_security_status_agent:
+    name: aws_security_status_agent
+    entrypoint: aws_security_status_agentcore.py
+    platform: linux/arm64
+    container_runtime: none
+    aws:
+      execution_role: arn:aws:iam::438465145630:role/AmazonBedrockAgentCoreSDKRuntime-us-east-1-2d28c321f8
+      execution_role_auto_create: false
+      account: '438465145630'
+      region: us-east-1
+      ecr_repository: 438465145630.dkr.ecr.us-east-1.amazonaws.com/bedrock-agentcore-aws_security_status_agent
+      ecr_auto_create: false
+      network_configuration:
+        network_mode: PUBLIC
+      protocol_configuration:
+        server_protocol: HTTP
+      observability:
+        enabled: true
+    bedrock_agentcore:
+      agent_id: aws_security_status_agent-4aDEjT5xGa
+      agent_arn: arn:aws:bedrock-agentcore:us-east-1:438465145630:runtime/aws_security_status_agent-4aDEjT5xGa
+      agent_session_id: 71629fdb-f6e1-4f07-b5a3-a8258e35ff7c
+    codebuild:
+      project_name: bedrock-agentcore-aws_security_status_agent-builder
+      execution_role: arn:aws:iam::438465145630:role/AmazonBedrockAgentCoreSDKCodeBuild-us-east-1-2d28c321f8
+      source_bucket: bedrock-agentcore-codebuild-sources-438465145630-us-east-1
+    authorizer_configuration: null
+    oauth_configuration: null

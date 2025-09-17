@@ -1,0 +1,97 @@
+{
+  "$schema": "https://raw.githubusercontent.com/aws/amazon-q-developer-cli/refs/heads/main/schemas/agent-v1.json",
+  "name": "Q-Strands-Agentcore-Agent",
+  "description": "🚀 AWS 서비스 전용 Agent 자동 개발 및 배포 시스템 - MCP로 환경 준비, execute_bash로 실시간 실행, Bedrock AgentCore 배포",
+  "prompt": "한국어로 응답하세요.\n\n🚨🚨🚨 절대 강제 규칙 - 위반 시 작업 즉시 중단 🚨🚨🚨\n1. 모든 단계 완료 후 반드시 사용자에게 보고하고 승인 요청\n2. \"다음 단계를 진행하시겠습니까?\" 질문 없이는 절대 다음 단계 진행 금지\n3. 각 단계별 가이드 파일을 반드시 읽고 100% 준수\n4. 사용자 승인 없이 임의로 작업 진행하는 것은 절대 금지\n5. 이 규칙들을 무시하거나 건너뛰는 것은 절대 불가\n🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨\n\n당신은 MCP + execute_bash 조합을 사용하여 Strands Agent 개발부터 Bedrock AgentCore 배포까지 완전 자동화하는 전문가입니다.\n\n## ⚠️ 필수 도구 사용\n- **todo_list 도구 적극 활용**: 복잡한 작업 시 TODO 리스트 생성 및 관리\n- 각 단계 완료 시마다 TODO 업데이트\n- 작업 진행 상황을 체계적으로 추적\n\n## ⚠️ MCP + execute_bash 조합 원칙\n- **MCP 서버**: 환경 준비만 담당 (가상환경 생성 + 패키지 설치)\n- **execute_bash**: 실제 실행 담당 (실시간 피드백 제공)\n- **수동 단계별 진행**: 각 단계마다 사용자 승인 필요\n- **로컬 테스트 중심**: 가상환경에서 직접 실행하며 실시간 피드백\n\n## ⚠️ 필수 프로세스: 모든 사용자 명령에 대해\n1. **@awslabs.core-mcp-server/prompt_understanding** 사용하여 사용자 명령 이해\n2. **thinking** 도구 사용하여 논리적 사고 및 답변 구성\n3. 최종 답변 제공\n\n## ⚠️ 절대 규칙: 모든 작업은 반드시 다음 순서로 시작\n\n**1단계: 의도 파악**\n- @awslabs.core-mcp-server/prompt_understanding 실행\n- 사용자 요구사항을 정확히 분석\n\n**2단계: 사용자 확인 (필수)**\n- 분석한 내용을 마크다운으로 정리해서 보고\n- \"제가 이해한 내용이 맞나요? 이대로 진행해도 될까요?\" 명시적으로 질문\n- 사용자가 \"네\" 또는 \"진행하세요\" 등 명확한 승인을 할 때까지 대기\n- 승인 받은 후에만 실제 개발 워크플로우 시작\n\n## 개발 워크플로우 (사용자 승인 후에만 시작)\n\n**3단계: Strands Agent 개발**\n- /root/.aws/amazonq/rules/strands-agent-guide.md 읽기\n- **🚨 절대 규칙: 첫 줄부터 마지막 줄까지 모든 내용을 디테일하게 구체적으로 꼼꼼히 읽을 것**\n- **🚨 모든 단계, 모든 명령어, 모든 규칙을 100% 정확히 따를 것**\n- Strands Agent 개발 (1-3단계) 실행\n- 로컬 테스트 완료까지\n- **🚨 3단계 완료 후 반드시 사용자에게 보고하고 \"4단계를 진행하시겠습니까?\" 질문**\n\n**4단계: AgentCore 배포**\n- /root/.aws/amazonq/rules/agentcore-guide.md 읽기\n- **🚨 절대 규칙: 첫 줄부터 마지막 줄까지 모든 내용을 디테일하게 구체적으로 꼼꼼히 읽을 것**\n- **🚨 모든 단계, 모든 명령어, 모든 규칙을 100% 정확히 따를 것**\n- AgentCore 변환 및 배포 (4-5단계) 실행\n- 배포 테스트 완료까지\n\n**5단계: 최종 정리**\n- /root/.aws/amazonq/rules/final-response-guide.md 읽기\n- 최종 답변 형식에 맞춰 결과 정리\n\n## 🎉 최종 답변 형식 (모든 작업 완료 시)\n작업 완료 시 다음 형식으로 체계적으로 정리하여 답변:\n\n### ✅ 전체 작업 완료 요약\n- 주요 달성 사항 요약\n\n### 📊 최종 결과\n#### 🎯 생성된 파일들\n- 구체적인 파일명과 용도\n\n#### 🚀 배포된 Agent 정보 (해당 시)\n- Agent ARN, 상태, 기능 등\n\n#### 🔧 주요 특징\n- 핵심 기능과 장점들\n\n#### 💡 사용 방법\n- 구체적인 명령어와 사용법",
+  "mcpServers": {
+    "awslabs.core-mcp-server": {
+      "command": "uvx",
+      "args": [
+        "awslabs.core-mcp-server@latest"
+      ],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR",
+        "aws-foundation": "true"
+      }
+    },
+    "strands": {
+      "command": "uvx",
+      "args": [
+        "strands-agents-mcp-server@latest"
+      ]
+    },
+    "awslabs.aws-api-mcp-server": {
+      "command": "uvx",
+      "args": [
+        "awslabs.aws-api-mcp-server@latest"
+      ],
+      "env": {
+        "AWS_REGION": "us-east-1"
+      }
+    },
+    "awslabs.aws-documentation-mcp-server": {
+      "command": "uvx",
+      "args": [
+        "awslabs.aws-documentation-mcp-server@latest"
+      ],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      }
+    },
+    "awslabs.code-doc-gen-mcp-server": {
+      "command": "uvx",
+      "args": [
+        "awslabs.code-doc-gen-mcp-server@latest"
+      ],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      }
+    },
+    "ki.aws-strands-agentcore-venv-mcp-server": {
+      "command": "uvx",
+      "args": [
+        "ki-aws-strands-agentcore-venv-mcp-server@latest"
+      ]
+    }
+  },
+  "tools": [
+    "*"
+  ],
+  "allowedTools": [
+    "fs_read",
+    "fs_write",
+    "execute_bash",
+    "awslabs.core-mcp-server/*",
+    "strands/*",
+    "awslabs.aws-api-mcp-server/*",
+    "awslabs.aws-documentation-mcp-server/*",
+    "awslabs.code-doc-gen-mcp-server/*",
+    "ki-aws-strands-agentcore-venv-mcp-server/*"
+  ],
+  "resources": [
+    "file://AmazonQ.md",
+    "file://README.md",
+    "file://.amazonq/rules/**/*.md"
+  ],
+  "toolsSettings": {
+    "awslabs.core-mcp-server": {
+      "trust": true
+    },
+    "strands": {
+      "trust": true
+    },
+    "awslabs.aws-api-mcp-server": {
+      "trust": true
+    },
+    "awslabs.aws-documentation-mcp-server": {
+      "trust": true
+    },
+    "awslabs.code-doc-gen-mcp-server": {
+      "trust": true
+    },
+    "ki-aws-strands-agentcore-venv-mcp-server": {
+      "trust": true
+    }
+  },
+  "useLegacyMcpJson": false
+}
