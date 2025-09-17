@@ -1,8 +1,6 @@
-# Q-Strands-Agentcore-Agent
+# Q-Strands-AgentCore-Agent
 
-🚀 **AWS 서비스 전용 Agent 자동 개발 및 배포 시스템**
-
-MCP로 환경 준비, execute_bash로 실시간 실행, Bedrock AgentCore 배포까지 완전 자동화
+ki.aws-strands-agentcore-venv-mcp-server를 활용하여 Strands Agent 개발부터 Bedrock AgentCore 배포까지 자동화
 
 ## 0. 들어가기에 앞서
 
