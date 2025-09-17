@@ -31,7 +31,7 @@ Q-Strands-Agentcore-Agent는 **Strands Agent 프레임워크**를 사용하여 *
 - **RDS 관리 Agent**: 데이터베이스 상태 확인, 백업 관리
 - **IAM 보안 Agent**: 권한 분석, 정책 검토, 보안 감사
 
-## 2. 🔧 MCP 서버 구성
+## 2. 🔧 MCP 서버 구성 및 환경 설정
 
 ### 사용 중인 MCP 서버
 
@@ -75,9 +75,9 @@ Q-Strands-Agentcore-Agent는 **Strands Agent 프레임워크**를 사용하여 *
 - 다양한 배포 모드 지원 (CodeBuild, 로컬, 하이브리드)
 - 설정 파일 관리 (`bedrock_agentcore.yaml`)
 
-## 3. ⚙️ Q CLI 환경 설정
+### ⚙️ Q CLI 환경 설정
 
-### Q CLI Agent의 Global 설정
+#### Q CLI Agent의 Global 설정
 
 이 Agent는 **글로벌 Agent**로 설정되어 있습니다:
 
@@ -85,7 +85,7 @@ Q-Strands-Agentcore-Agent는 **Strands Agent 프레임워크**를 사용하여 *
 - **🌐 범위**: 어느 디렉토리에서든 사용 가능
 - **🎯 용도**: AWS 서비스 전용 Agent 개발 및 배포 전문 도구
 
-### Q CLI 요구사항
+#### Q CLI 요구사항
 
 - **📌 버전**: Q CLI 1.15.0 이상 필요
 - **🧪 실험 기능**: 다음 4개 experiment 기능을 모두 활성화해야 합니다
@@ -94,7 +94,7 @@ Q-Strands-Agentcore-Agent는 **Strands Agent 프레임워크**를 사용하여 *
   - Tangent Mode [ON] - 격리된 대화를 위한 임시 모드 (/tangent)
   - Todo Lists [ON] - TODO 리스트 생성 및 관리 (/todo)
 
-### Rules 파일 구조
+#### Rules 파일 구조
 
 Agent가 참조하는 가이드 파일들은 다음 위치에 있습니다:
 
@@ -105,7 +105,7 @@ Agent가 참조하는 가이드 파일들은 다음 위치에 있습니다:
 └── final-response-guide.md    # 최종 답변 형식 가이드
 ```
 
-### 전체 요구사항 정리
+#### 전체 요구사항 정리
 
 이 프로젝트를 사용하기 위해 다음 사항들이 필요합니다:
 
@@ -117,9 +117,9 @@ Agent가 참조하는 가이드 파일들은 다음 위치에 있습니다:
 - 4개 experiment 기능 모두 활성화 (Knowledge, Thinking, Tangent Mode, Todo Lists)
 - Agent 파일을 글로벌 위치에 배치 (`~/.aws/amazonq/cli-agents/`)
 
-## 4. 📋 기술 사양
+### 📋 기술 사양
 
-### 리전 및 모델 설정
+#### 리전 및 모델 설정
 
 **🌍 리전 설정:**
 - **Strands 기본 리전**: us-west-2
@@ -128,12 +128,13 @@ Agent가 참조하는 가이드 파일들은 다음 위치에 있습니다:
 
 **🤖 모델 설정:**
 - **기본 모델**: `us.anthropic.claude-sonnet-4-20250514-v1:0`
-- **Bedrock 모델 액세스**: us-east-1에서 claude-sonnet-4 액세스 권한 필요
+- **리전 접두사**: `us.` 필수 (Cross-Region Inference)
+- **Bedrock 모델 액세스**: us-east-1에서 Claude 4 액세스 권한 필요
 
-### 비용 구조
+#### 비용 구조
 
 **💰 Strands Agent 사용료:**
-- **Claude 모델 비용**: claude-sonnet-4 모델 호출 시마다 토큰 기반 과금
+- **Claude 모델 비용**: AWS Bedrock Claude 모델 호출 시마다 토큰 기반 과금
 - **AWS 서비스 비용**: `use_aws` 도구 사용 시 해당 AWS 서비스 비용 별도 발생
 - **AgentCore 배포 비용**: Bedrock AgentCore 런타임 비용 추가
 
@@ -142,7 +143,7 @@ Agent가 참조하는 가이드 파일들은 다음 위치에 있습니다:
 - **토큰 최적화**: 시스템 프롬프트 최적화로 토큰 사용량 감소 권장
 - **사용량 모니터링**: AWS 서비스 사용량 및 비용 모니터링 필수
 
-## 5. 🔄 작업 흐름
+## 3. 🔄 작업 흐름
 
 ### 📝 1단계: 요구사항 분석
 사용자가 원하는 AWS 서비스 Agent의 기능과 목적을 파악합니다.
@@ -165,7 +166,7 @@ Agent가 참조하는 가이드 파일들은 다음 위치에 있습니다:
 - 배포된 Agent 접근 방법
 - 사용법 및 예시 제공
 
-## 6. 🔧 설치 및 설정
+## 4. 🔧 설치 및 설정
 
 ### 📦 Agent 설치
 
@@ -198,7 +199,7 @@ cd ~/.aws/amazonq/cli-agents
 q chat --agent Q-Strands-Agentcore-Agent
 ```
 
-## 7. 💡 실제 사용법
+## 5. 💡 실제 사용법
 
 Q-Strands-AgentCore-Agent에 대한 사용 예시입니다.
 
