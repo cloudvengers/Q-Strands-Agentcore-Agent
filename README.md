@@ -36,6 +36,37 @@ ki.aws-strands-agentcore-venv-mcp-server를 활용하여 Strands Agent 개발부
 - `bedrock-agentcore`
 - `bedrock-agentcore-starter-toolkit`
 
+**🔧 bedrock-agentcore-starter-toolkit:**
+- Strands Agent를 Bedrock AgentCore 형식으로 변환하는 도구
+- `BedrockAgentCoreApp()` 래퍼 제공
+- `@app.entrypoint` 데코레이터를 통한 엔트리포인트 정의
+- 원본 Strands Agent 로직을 100% 유지하면서 AgentCore 배포 가능
+- `agentcore configure`, `agentcore launch` 명령어 지원
+
+### 리전 및 모델 설정
+
+**🌍 리전 설정:**
+- **Strands 기본 리전**: us-west-2
+- **프로젝트 설정**: us-east-1 (환경변수로 변경)
+- **Claude 4 모델**: Cross-Region Inference 지원으로 us-east-1에서 사용 가능
+
+**🤖 모델 설정:**
+- **기본 모델**: `us.anthropic.claude-sonnet-4-20250514-v1:0`
+- **리전 접두사**: `us.` 필수 (Cross-Region Inference)
+- **Bedrock 모델 액세스**: us-east-1에서 Claude 4 액세스 권한 필요
+
+### 비용 구조
+
+**💰 Strands Agent 사용료:**
+- **Claude 모델 비용**: AWS Bedrock Claude 모델 호출 시마다 토큰 기반 과금
+- **AWS 서비스 비용**: `use_aws` 도구 사용 시 해당 AWS 서비스 비용 별도 발생
+- **AgentCore 배포 비용**: Bedrock AgentCore 런타임 비용 추가
+
+**⚠️ 비용 주의사항:**
+- **개발/테스트**: 로컬 테스트도 실제 Claude 모델을 호출하므로 비용 발생
+- **토큰 최적화**: 시스템 프롬프트 최적화로 토큰 사용량 감소 권장
+- **사용량 모니터링**: AWS 서비스 사용량 및 비용 모니터링 필수
+
 **🔍 가상환경 위치:** `~/.ki.aws-strands-agentcore-venv`
 
 **⚠️ 요구사항:** uvx 설치 필요 (`pip install uvx`)
@@ -164,3 +195,9 @@ cd ~/.aws/amazonq/cli-agents
 # Agent와 함께 Q CLI 실행
 q chat --agent Q-Strands-Agentcore-Agent
 ```
+
+## 4. 실제 사용법
+
+Q-Strands-AgentCore-Agent에 대한 사용 예시입니다.
+
+**📖 상세 사용 가이드:** [Notion 링크](https://www.notion.so/Q-Strnads-AgentCore-Agent-27023c26282d800e8f24eb44ec1f0194?source=copy_link)
