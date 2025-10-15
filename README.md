@@ -202,7 +202,7 @@ q chat --agent Q-Strands-Agentcore-Agent
 
 Q-Strands-AgentCore-Agent에 대한 사용 예시입니다.
 
-**📖 상세 사용 가이드:** [Notion 링크](https://www.notion.so/Q-Strands-AgentCore-Agent-27023c26282d800e8f24eb44ec1f0194?source=copy_link)
+**📖 상세 사용 가이드:** [Notion 링크](https://field-saxophone-5da.notion.site/Q-Strands-AgentCore-Agent-27023c26282d800e8f24eb44ec1f0194)
 
 **💻 실제 예제 코드:** `examples/` 폴더를 참조하세요
 - 다양한 AWS 서비스 Agent 예제들이 포함되어 있습니다
